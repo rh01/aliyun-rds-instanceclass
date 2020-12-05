@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "bazel-golang-wasm-protoc/protos/api";
+
+import "google/protobuf/any.proto";
+
+message Instance {
+  string zone_i_d = 1;
+  string network_types = 2;
+  string region_i_d  = 3;
+  string zone_statue = 4;
+  string engine = 5;
+  string engine_version = 6;
+  string category = 7;
+  string d_b_instance_class = 8;
+  string storage_type = 9;
+  // repeated google.protobuf.Any d_b_instance_range = 10;
+  string storage_range = 11;
+}
+
+message Instances {
+  repeated Instance instances = 1;
+  int32 count = 2;
+}
+
+message SearchRequest {
+  string query = 1;
+  int32 page_index = 2;
+  int32 page_size = 3;
+}
+
+service Api {
+  rpc Search (SearchRequest) returns (Instances);
+}
